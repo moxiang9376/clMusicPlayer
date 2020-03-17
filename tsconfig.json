@@ -2,15 +2,13 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "strict": true,
+    "strict": false,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    // 在表达式和声明上有隐含的any类型时报错
-    "noImplicitAny": false,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
