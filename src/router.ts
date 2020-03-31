@@ -6,7 +6,7 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/homePage',
+      path: '/',
       name: 'homePage',
       component: () => import(/* webpackChunkName: "about" */ './views/homePage.vue'),
     },
@@ -15,11 +15,11 @@ export default new Router({
       name: 'wheels',
       component: () => import(/* webpackChunkName: "about" */ './views/wheels.vue'),
     },
-    {
-      path: '/',
-      name: 'test',
-      component: () => import(/* webpackChunkName: "about" */ './views/test.vue'),
-    },
+    // {
+    //   path: '/',
+    //   name: 'test',
+    //   component: () => import(/* webpackChunkName: "about" */ './views/test.vue'),
+    // },
 
   ],
 });

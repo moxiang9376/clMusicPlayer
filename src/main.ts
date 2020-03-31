@@ -19,7 +19,7 @@ Vue.prototype.qs= qs
 import 'lib-flexible/flexible.js'
 
 //引入公用函数
-import common from "./assets/js/common.js"
+import common from "@/assets/js/common.js"
 Vue.prototype.common= common
 
 
