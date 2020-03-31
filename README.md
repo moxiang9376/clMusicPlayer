@@ -1,29 +1,7 @@
-# cloundlistents
+# 云听音乐播放器（cloundListenMusicPlayer）
 
-## Project setup
-```
-npm install
-```
+#pwa,Ts,VUE
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+#demo
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#一个玩具

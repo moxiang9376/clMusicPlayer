@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-// import store from './store'
-
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import './registerServiceWorker';
 
 //浏览器默认样式样式清空
 import "./assets/css/reset.css"
@@ -21,10 +21,17 @@ import 'lib-flexible/flexible.js'
 //引入公用函数
 import common from "./assets/js/common.js"
 Vue.prototype.common= common
-Vue.config.productionTip = false
+
+
+
+// //引入转盘函数
+// import giftwheel from "./assets/js/giftWheel.js"
+// Vue.prototype.giftwheel = giftwheel
+
+Vue.config.productionTip = false;
 
 new Vue({
   router,
-  // store,
-  render: h => h(App)
-}).$mount('#app')
+  store,
+  render: (h) => h(App),
+}).$mount('#app');

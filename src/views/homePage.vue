@@ -18,7 +18,7 @@
         </select>
       </div>
       <div class="nav_title">
-        云 听
+        云听
       </div>
     </div>
     <div
@@ -42,10 +42,6 @@
         @click="search()"
         class="search_btn"
       >search</div>
-      <div
-        class="search_btn"
-        @click="test()"
-      >你好</div>
     </div>
     <div
       class="music_line_title"
@@ -81,78 +77,67 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import musicPlayer from '../components/musicPlayer.vue'
+import { Component, Vue } from "vue-property-decorator";
+import musicPlayer from "../components/musicPlayer.vue";
 @Component({
   components: {
     musicPlayer
   }
 })
 export default class homePage extends Vue {
-  private keyWord: string = ''; // 关键词
+  private keyWord: string = ""; // 关键词
   private musicStyle: number = 0; // 音乐平台编号
   private musicPlatform: any = [
     // 音乐平台
-    { style: 0, name: '网易' }
+    { style: 0, name: '网易' },
+    // { style: 1, name: '企鹅' },
+    // { style: 2, name: '酷我' }
   ];
-  private musicList: [] = []; // 搜索结果
-  private box_check: boolean = true; // 动画效果控制
-  private musicListPage: number = 1; // 音乐列表页码
-  private musicInfo: [] = []; // 音乐数据
-  created () {}
-  mounted () {}
+  private musicList: [] = []; //搜索结果
+  private box_check: boolean = true; //动画效果控制
+  private musicListPage: number = 1; //音乐列表页码
+  private musicInfo: [] = []; //音乐数据
+  created() {}
+  mounted() {}
+  //上拉加载
+  onScroll() {
+    let that:any = this;
+    let box: any = this.$refs.music_list_show;
+    let boxHeight: any = box.clientHeight;
+    let offsetHeight: any = box.scrollTop;
+    let scrollHeight: any = box.scrollHeight;
 
-  test () {
-    let that: any = this
-    // let url: any = "/test/search?keywords=海阔天空";
-    // { params: { keywords: that.keyWord } }
-    that.axios
-      .get('/test/search', { params: { keywords: that.keyWord } })
-      .then(res => {
-        console.log(res)
-      })
-  }
-  // 上拉加载
-  onScroll () {
-    let that: any = this
-
-    let box: any = this.$refs.music_list_show
-
-    let boxHeight: any = box.clientHeight
-    let offsetHeight: any = box.scrollTop
-    let scrollHeight: any = box.scrollHeight
-
-    /* 如果上拉高度+DOM元素高度 = 列表总高度，拉到低部了 */
+    /* 如果上拉高度+DOM元素高度 = 列表总高度，拉到低部了*/
     if (boxHeight + offsetHeight == scrollHeight) {
-      that.musicListPage++
+      that.musicListPage++;
       that.common
         .getMusic(that.musicStyle, that.keyWord, that.musicListPage)
         .then(res => {
-          that.musicList = that.musicList.concat(res)
-        })
+          that.musicList = that.musicList.concat(res);
+        });
     }
   }
 
-  // 点击播放
-  playSong (item: any) {
-    let that = this
-    that.musicInfo = item
+  //点击播放
+  playSong(item: any) {
+    let that = this;
+    that.musicInfo = item;
   }
 
-  // 搜索
-  search () {
-    let that: any = this
+  //搜索
+  search() {
+    let that: any = this;
     if (that.keyWord == '') {
-      alert('不找点什么听听听？')
-      return
+      alert('不找点什么听听？');
+      return;
     }
     that.common
       .getMusic(that.musicStyle, that.keyWord, that.musicListPage)
       .then(res => {
-        console.log(res)
-        that.musicList = res
-        that.box_check = false
-      })
+        console.log(res);
+        that.musicList = res;
+        that.box_check = false;
+      });
   }
 }
 </script>

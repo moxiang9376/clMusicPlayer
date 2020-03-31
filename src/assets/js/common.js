@@ -4,8 +4,8 @@ export default {
   // 获取音乐列表(搜索)
   getMusic: function (style, songName, page) {
     return new Promise(function (resolve, reject) {
-      var musicStyleArr = ['netease', 'tencent', 'kugou', 'kuwo']
-      var musicUrl =
+      let musicStyleArr = ['netease', 'tencent', 'kugou', 'kuwo']
+      let musicUrl =
         'https://v1.itooi.cn/' + musicStyleArr[style] + '/search'
       let params = {
         keyword: songName,
@@ -36,8 +36,8 @@ export default {
   // 获取歌单列表(搜索)
   getSongList: function (style, songId) {
     return new Promise(function (resolve, reject) {
-      var musicStyleArr = ['netease', 'tencent', 'kugou', 'kuwo']
-      var musicUrl =
+      let musicStyleArr = ['netease', 'tencent', 'kugou', 'kuwo']
+      let musicUrl =
         'https://v1.itooi.cn/' + musicStyleArr[style] + '/songList'
       let params = {
         id: songId
@@ -83,19 +83,50 @@ export default {
       resolve(newMusicListArr)
     })
   },
-  randomNum (style, length) {
+
+
+  /* 随机函数 */
+  randomNum(style, length) {
     if (style == true) {
       let num = Math.floor(Math.random() * (length + 1))
       return num
     } else {
       return 1
     }
-  }
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+  async test() {
+    const response = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve("async await test");
+      }, 5000);
+    });
+    console.log(response);
+  },
+
+
+
+
+
+
+
+
 
 }
 
 // 修改音乐列表的数据(搜索)
-function changeMusicList (style, data) {
+function changeMusicList(style, data) {
   let musicList = []
   let getMusicList = ''
   switch (style) {
@@ -154,6 +185,6 @@ function changeMusicList (style, data) {
 }
 
 // 修改歌单列表的数据
-function changeSongList (style, data) {
+function changeSongList(style, data) {
 
 }
