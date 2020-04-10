@@ -25,18 +25,21 @@
       class="search_box"
       :class="[box_check?'show':'hide']"
     >
-      <div class="title">
+      <div
+        class="title"
+        @click="goWheel"
+      >
         云 听
       </div>
       <div class="input_box">
         <input v-model="keyWord" />
-        <select v-model="musicStyle">
+        <!-- <select v-model="musicStyle">
           <option
             class="option_style"
             v-for="item in musicPlatform"
             :value="item.style"
           >{{item.name}}</option>
-        </select>
+        </select> -->
       </div>
       <div
         @click="search()"
@@ -86,10 +89,10 @@ import musicPlayer from "../components/musicPlayer.vue";
 })
 export default class homePage extends Vue {
   private keyWord: string = ""; // 关键词
-  private musicStyle: number = 0; // 音乐平台编号
+  private musicStyle: number = 4; // 音乐平台编号（默认为自己部署的接口）
   private musicPlatform: any = [
     // 音乐平台
-    { style: 0, name: '网易' },
+    { style: 0, name: "网易" }
     // { style: 1, name: '企鹅' },
     // { style: 2, name: '酷我' }
   ];
@@ -98,10 +101,15 @@ export default class homePage extends Vue {
   private musicListPage: number = 1; //音乐列表页码
   private musicInfo: [] = []; //音乐数据
   created() {}
-  mounted() {}
+  mounted() {
+    let that: any = this;
+    // that.commom.getMusic2("海阔天空").then(res=>{
+    //   console.log(res)
+    // })
+  }
   //上拉加载
   onScroll() {
-    let that:any = this;
+    let that: any = this;
     let box: any = this.$refs.music_list_show;
     let boxHeight: any = box.clientHeight;
     let offsetHeight: any = box.scrollTop;
@@ -120,15 +128,24 @@ export default class homePage extends Vue {
 
   //点击播放
   playSong(item: any) {
-    let that = this;
-    that.musicInfo = item;
+    let that: any = this;
+    if (that.musicStyle == 4) {
+      let url: string = "http://118.24.179.175:8888/song/url?id=" + item.id;
+      that.common.getSongUrl(url).then(res => {
+        console.log(res);
+        item.url = res;
+        that.musicInfo = item;
+      });
+    } else {
+      that.musicInfo = item;
+    }
   }
 
   //搜索
   search() {
     let that: any = this;
-    if (that.keyWord == '') {
-      alert('不找点什么听听？');
+    if (that.keyWord == "") {
+      alert("不找点什么听听？");
       return;
     }
     that.common
@@ -138,6 +155,17 @@ export default class homePage extends Vue {
         that.musicList = res;
         that.box_check = false;
       });
+  }
+
+  //路由跳转测试
+  goWheel() {
+    this.$router.push({
+      path: "wheels",
+      name: "wheels",
+      params: {
+        id: "helloworld"
+      }
+    });
   }
 }
 </script>
@@ -190,6 +218,10 @@ export default class homePage extends Vue {
 }
 
 .nav_search {
+  &:active {
+    background: rgba(175, 238, 238, 0.5);
+  }
+  cursor: pointer;
   margin: 0 5px;
   padding: 0 5px;
   height: 30px;
@@ -253,6 +285,10 @@ export default class homePage extends Vue {
 }
 
 .search_btn {
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  cursor: pointer;
   display: inline-block;
   margin-top: 10px;
   padding: 10px;
@@ -263,7 +299,6 @@ export default class homePage extends Vue {
 }
 
 .music_list_box {
-  visibility: hidden;
   width: 100%;
   height: 85%;
   font-size: 28px;
@@ -275,7 +310,6 @@ export default class homePage extends Vue {
 }
 
 .music_line_title {
-  visibility: hidden;
   width: 100%;
   font-size: 28px;
   span {
@@ -302,7 +336,10 @@ export default class homePage extends Vue {
 
 .music_list_line {
   margin-top: 10px;
-
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  cursor: pointer;
   img {
     width: 50px;
     height: 50px;

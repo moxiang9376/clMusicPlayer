@@ -28,11 +28,14 @@ import giftwheel from ".././assets/js/giftWheel.js";
 @Component({})
 export default class wheels extends Vue {
   private created() {}
-  private mounted() {}
+  private mounted() {
+console.log(this.$route.params)
+  }
+
   wheelImg: string = "";
   wantThing: string = "";
   wantArr: [] = [];
-
+  
   addWant() {
     let that: any = this;
     if (that.wantArr.length > 5) {
