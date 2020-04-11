@@ -50,9 +50,9 @@
       class="music_line_title"
       :class="[box_check?'hide':'show']"
     >
-      <span @click="search()">封面</span>
-      <span>名称</span>
-      <span>演唱者</span>
+      <!-- <span>封面</span> -->
+      <span>歌曲</span>
+      <span>演唱</span>
     </div>
     <div
       class="music_list_box"
@@ -69,7 +69,7 @@
           v-for="item in musicList"
           @click="playSong(item)"
         >
-          <span><img :src="item.pic" /></span>
+          <!-- <span><img :src="item.pic" /></span> -->
           <span>{{item.name}}</span>
           <span>{{item.singer}}</span>
         </div>
@@ -118,6 +118,7 @@ export default class homePage extends Vue {
     /* 如果上拉高度+DOM元素高度 = 列表总高度，拉到低部了*/
     if (boxHeight + offsetHeight == scrollHeight) {
       that.musicListPage++;
+      console.log(that.musicListPage)
       that.common
         .getMusic(that.musicStyle, that.keyWord, that.musicListPage)
         .then(res => {
@@ -315,7 +316,7 @@ export default class homePage extends Vue {
   span {
     display: inline-block;
     text-align: center;
-    width: 33%;
+    width: 50%;
   }
 }
 
@@ -350,6 +351,7 @@ export default class homePage extends Vue {
     white-space: nowrap;
     text-overflow: ellipsis;
     vertical-align: center;
+    width:50%;
   }
 }
 
