@@ -9,6 +9,7 @@ import "./assets/css/reset.css";
 //ajax请求插件
 import axios from "axios";
 import Vueaxios from "vue-axios";
+
 Vue.use(Vueaxios, axios);
 
 //ajax数据格式转换
@@ -27,7 +28,7 @@ Vue.prototype.common = common;
 // Vue.prototype.giftwheel = giftwheel
 
 Vue.config.productionTip = false;
-//监听浏览器宽度的改变
+//监听浏览器宽度的改变(响应式测试)
 window.onresize = function() {
   let maxWidth: any = window.screen.width;
   if (maxWidth < 750) {

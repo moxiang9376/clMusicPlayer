@@ -1,6 +1,6 @@
 <template>
   <div class="giftWheel">
-    <label class="wantTitle">输入想选的东西</label>
+    <label class="wantTitle">输入选项</label>
     <input
       class="wheelInput"
       v-model="wantThing"
@@ -13,11 +13,23 @@
     <div
       class="setWheel"
       @click="setWheel"
-    >生成转盘</div>
+    >开始旋转</div>
+    <div>
+      目前选项
+      <div
+        class="wh_choose_box"
+        v-for="(item,index) in wantArr"
+      >
+        <div>{{index+1}}、</div>
+        <div>{{item.giftText}}</div>
+        <div @click="delChoose(index)">删除</div>
+      </div>
+    </div>
     <img
-      class="wh_wheel_img"
-      :src="wheelImg"
       v-if="wheelImg"
+      :src="wheelImg"
+      :style="{transform:rotatePointer,transition:transitionPointer}"
+      class="wh_wheel_img"
     />
   </div>
 </template>
@@ -28,43 +40,75 @@ import giftwheel from ".././assets/js/giftWheel.js";
 @Component({})
 export default class wheels extends Vue {
   private created() {}
-  private mounted() {
-console.log(this.$route.params)
-  }
+  private mounted() {}
 
   wheelImg: string = "";
   wantThing: string = "";
   wantArr: [] = [];
-  
+  wantArrCheck: boolean = true; //检查wantArr是否有修改
+  timer: any = null;
+
+  rotatePointer: string = "";
+  transitionPointer: string = "";
   addWant() {
     let that: any = this;
     if (that.wantArr.length > 5) {
       alert("有那么多能选的，还要转盘干什么？");
-      return
+      return;
     }
 
     if (that.wantThing == "") {
       alert("什么都不想选，还要转盘干什么？");
-      return
+      return;
     } else {
       that.wantArr.push({
         giftText: that.wantThing,
         id: "none"
       });
+      that.wantArrCheck = true;
     }
     that.wantThing = "";
   }
+  //删除选项
+  delChoose(index) {
+    let that: any = this;
+    that.wantArr.splice(index, 1);
+    that.wantArrCheck = true;
+  }
 
   setWheel() {
-   let that: any = this;
+    let that: any = this;
     if (that.wantArr.length == 1) {
       alert("只有一个可以选，还要转盘干什么？");
-      return
+      return;
     }
-    let dataArr = that.wantArr;
-    giftwheel.drawWheel(dataArr).then(res => {
-      that.wheelImg = res;
-    });
+    clearTimeout(that.timer);
+    that.timer = null;
+    if (that.wantArrCheck == false) {
+      that.timer = setTimeout(() => {
+        let maxChoose: any = that.wantArr.length;
+        that.rotatePointer = "rotate(" + rotateWheel(maxChoose) + "deg)"; //旋转角度
+        that.transitionPointer = "transform " + maxChoose + "s ease-in-out";
+      }, 1000);
+    } else {
+      giftwheel.drawWheel(that.wantArr).then(res => {
+        that.wheelImg = res;
+        that.wantArrCheck = false;
+        that.timer = setTimeout(() => {
+          let maxChoose: any = that.wantArr.length;
+          that.rotatePointer = "rotate(" + rotateWheel(maxChoose) + "deg)"; //旋转角度
+          that.transitionPointer = "transform " + maxChoose + "s ease-in-out";
+        }, 1000);
+      });
+    }
+
+    function rotateWheel(maxChoose) {
+      //根据所有选项随机选中
+      let chooseOne: any = Math.floor(Math.random() * maxChoose);
+      let chance: any = (1 / maxChoose) * 360;
+      let roundDeg: any = 360 - (chooseOne - 1) * chance + 360 * maxChoose; //旋转到第几个扇形区域的正中间
+      return roundDeg;
+    }
   }
 }
 </script>
@@ -118,5 +162,11 @@ console.log(this.$route.params)
   text-align: center;
   color: white;
   border-radius: 5px;
+}
+
+.wh_choose_box {
+  div {
+    display: inline-block;
+  }
 }
 </style>

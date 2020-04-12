@@ -28,7 +28,7 @@ function drawWheel(dataArr) {
                 console.log(fontSize)
                 var ctx = canvas.getContext("2d");
                 //绘制背景图片
-                ctx.drawImage(wheelBackImg, 0, 0, 658, 658)
+                // ctx.drawImage(wheelBackImg, 0, 0, 658, 658)
                 //根据圆盘总共有几个数组元素形成几个扇形区域
                 //绘制扇形
                 var chance = 1 / dataArr.length;

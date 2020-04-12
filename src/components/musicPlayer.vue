@@ -51,19 +51,15 @@ export default class musicPlayer extends Vue {
   //   console.log(newVal);
   // }
   mounted() {
+    //获取音乐进度条总长度
     let that: any = this;
-    console.log(that.$refs.progress_box.offsetWidth);
     that.progress_max_width = that.$refs.progress_box.offsetWidth;
   }
   playSong() {
     let that: any = this;
     //切换音乐，配置重置
-    that.progress_width = "0";
-    that.songTime = "00:00";
-    that.playTime = "00:00";
     that.songTime = changeTimeMin(that.$refs.audio.duration);
     function changeTimeMin(time) {
-      console.log(time);
       let m: any = parseInt(time / 60);
       let s: any = Math.ceil(time % 60);
       if (m < 10) {
@@ -110,7 +106,7 @@ export default class musicPlayer extends Vue {
       }
     }, 1000);
   }
-  //   @touchstart="progressLineTouchStart"
+  //@touchstart="progressLineTouchStart"
   // @touchmove="progressLineTouchMove"
   // @touchend="progressLineTouchEnd"
   // @click= "changeProgress"
@@ -127,34 +123,15 @@ export default class musicPlayer extends Vue {
     }
   }
 
-  progressLineTouchStart(e) {
-    console.log(e);
-    console.log(e.target.offsetWidth);
-  }
+  progressLineTouchStart(e) {}
 
   progressLineTouchMove(e) {
     // console.log(e)
   }
 
-  progressLineTouchEnd(e) {
-    console.log("stop");
-    console.log(e);
-    console.log(e.target.clientWidth);
-    console.log(e.changedTouches[0].clientX);
-    let that: any = this;
-    let progress: any = Math.ceil(
-      (e.changedTouches[0].clientX / that.progress_max_width) * 100
-    );
+  progressLineTouchEnd(e) {}
 
-    if (progress <= 0) {
-      progress = 0;
-    } else if (progress >= 100) {
-      progress = 100;
-    }
-    console.log(progress);
-    that.progress_width = progress + "%";
-  }
-
+  //点击改变音乐进度条
   changeProgress(e) {
     let that: any = this;
     let playTime: any =
