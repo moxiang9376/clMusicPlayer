@@ -38,6 +38,7 @@ function drawWheel(dataArr) {
                 ctx.save()
                 for (var i = 0; i < dataArr.length; i++) {
                     //绘制扇形区域
+                    console.log(i)
                     ctx.save()
                     endAngle = startAngle + chance * Math.PI * 2; //扇形结束角度
                     ctx.beginPath();
@@ -48,7 +49,7 @@ function drawWheel(dataArr) {
                     ctx.fillStyle = "#FEE6C3"
                     ctx.fill();
                     //绘制线条
-                    ctx.lineWidth = 2
+                    ctx.lineWidth = 1
                     ctx.strokeStyle = "#FF8310"
                     ctx.stroke()
                     ctx.closePath()

@@ -75,7 +75,10 @@
         </div>
       </div>
     </div>
-    <musicPlayer v-bind:musicInfo="musicInfo"></musicPlayer>
+    <musicPlayer
+      v-if="!box_check"
+      v-bind:musicInfo="musicInfo"
+    ></musicPlayer>
   </div>
 </template>
 
@@ -106,6 +109,8 @@ export default class homePage extends Vue {
     // that.commom.getMusic2("海阔天空").then(res=>{
     //   console.log(res)
     // })
+    let x: any = ("ABC" + +"A").toLowerCase();
+    console.log(x);
   }
   //上拉加载
   onScroll() {
@@ -118,7 +123,7 @@ export default class homePage extends Vue {
     /* 如果上拉高度+DOM元素高度 = 列表总高度，拉到低部了*/
     if (boxHeight + offsetHeight == scrollHeight) {
       that.musicListPage++;
-      console.log(that.musicListPage)
+      console.log(that.musicListPage);
       that.common
         .getMusic(that.musicStyle, that.keyWord, that.musicListPage)
         .then(res => {
@@ -351,7 +356,7 @@ export default class homePage extends Vue {
     white-space: nowrap;
     text-overflow: ellipsis;
     vertical-align: center;
-    width:50%;
+    width: 50%;
   }
 }
 

@@ -57,6 +57,7 @@ export default class musicPlayer extends Vue {
   }
   playSong() {
     let that: any = this;
+    that.play = "播放"
     //切换音乐，配置重置
     that.songTime = changeTimeMin(that.$refs.audio.duration);
     function changeTimeMin(time) {
@@ -116,10 +117,10 @@ export default class musicPlayer extends Vue {
     let that: any = this;
     if (that.$refs.audio.paused) {
       that.$refs.audio.play();
-      that.play = "暂停";
+      that.play = "播放";
     } else {
       that.$refs.audio.pause();
-      that.play = "播放";
+      that.play = "暂停";
     }
   }
 
