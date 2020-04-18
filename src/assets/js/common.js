@@ -13,7 +13,7 @@ export default {
           url: url,
           params: {
             keywords: songName,
-            limit: 20,
+            limit: 30,
             offset: page - 1,
           },
         }).then((res) => {

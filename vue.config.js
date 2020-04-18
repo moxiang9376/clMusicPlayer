@@ -10,12 +10,12 @@ module.exports = {
         target: "https://v1.itooi.cn/",
         changeOrigin: true,
       },
-      "https://c.y.qq.com/": {
-        target: "https://c.y.qq.com",
-        changeOrigin: true,
-      },
       "http://118.24.179.175:8888/": {
         target: "http://118.24.179.175:8888/",
+        changeOrigin: true,
+      },
+      "http://118.24.179.175:666/": {
+        target: "http://118.24.179.175:666/",
         changeOrigin: true,
       },
     },

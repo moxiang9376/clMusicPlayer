@@ -104,14 +104,7 @@ export default class homePage extends Vue {
   private musicListPage: number = 1; //音乐列表页码
   private musicInfo: [] = []; //音乐数据
   created() {}
-  mounted() {
-    let that: any = this;
-    // that.commom.getMusic2("海阔天空").then(res=>{
-    //   console.log(res)
-    // })
-    let x: any = ("ABC" + +"A").toLowerCase();
-    console.log(x);
-  }
+  mounted() {}
   //上拉加载
   onScroll() {
     let that: any = this;
