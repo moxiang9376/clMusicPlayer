@@ -1,7 +1,8 @@
 # 云听音乐播放器（cloundListenMusicPlayer）
 
-#pwa,Ts,VUE
+#前端页面：vue+ts+vuex
 
-#demo
+#后端接口：nodejs+mysql
 
 #一个玩具
+
