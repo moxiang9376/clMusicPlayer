@@ -18,6 +18,12 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/wheels.vue"),
     },
     {
+      path: "/musicInfo",
+      name: "musicInfo",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/musicInfo.vue"),
+    },
+    {
       path: "/test",
       name: "test",
       component: () =>

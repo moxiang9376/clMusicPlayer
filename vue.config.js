@@ -18,6 +18,10 @@ module.exports = {
         target: "http://118.24.179.175:666/",
         changeOrigin: true,
       },
+      "http://118.24.179.175:3200/": {
+        target: "http://118.24.179.175:3200/",
+        changeOrigin: true,
+      },
     },
   },
 

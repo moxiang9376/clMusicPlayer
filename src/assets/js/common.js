@@ -2,11 +2,11 @@ import axios from "axios";
 
 export default {
   // 获取音乐列表(搜索)
-  getMusic: function(style, songName, page) {
-    return new Promise(function(resolve, reject) {
+  getMusic: function (style, songName, page) {
+    return new Promise(function (resolve, reject) {
       let musicList = [];
       if (style == 4) {
-        //自己部署的服务器接口
+        //自己部署的服务器接口(网易)
         let url = "http://118.24.179.175:8888/search";
         axios({
           methods: "get",
@@ -21,7 +21,25 @@ export default {
           musicList = changeMusicList(style, res);
           resolve(musicList);
         });
-      } else {
+      }
+      //自己部署的QQ音乐接口
+      else if (style == 5) {
+        let url = 'http://118.24.179.175:3200/getSearchByKey'
+        axios({
+          methods: "get",
+          url: url,
+          params: {
+            key: songName,
+            limit: 30,
+            page: page - 1
+          }
+        }).then(res => {
+          console.log(res)
+          musicList = changeMusicList(style, res);
+          resolve(musicList);
+        })
+      }
+      else {
         let musicStyleArr = ["netease", "tencent", "kugou", "kuwo"];
         let musicUrl =
           "https://v1.itooi.cn/" + musicStyleArr[style] + "/search";
@@ -55,8 +73,8 @@ export default {
     });
   },
   // 获取歌单列表(搜索)
-  getSongList: function(style, songId) {
-    return new Promise(function(resolve, reject) {
+  getSongList: function (style, songId) {
+    return new Promise(function (resolve, reject) {
       let musicStyleArr = ["netease", "tencent", "kugou", "kuwo"];
       let musicUrl =
         "https://v1.itooi.cn/" + musicStyleArr[style] + "/songList";
@@ -93,8 +111,8 @@ export default {
     });
   },
   // 修改用户歌单列表
-  changeMusicList: function(musicListArr) {
-    return new Promise(function(resolve, reject) {
+  changeMusicList: function (musicListArr) {
+    return new Promise(function (resolve, reject) {
       let newMusicListArr = [];
       let a = musicListArr.split(",");
       console.log(a);
@@ -204,6 +222,19 @@ function changeMusicList(style, data) {
         // listInfo.pic = "https://v1.itooi.cn/kuwo/pic?id=" + item.ALBUMID
         musicList.push(listInfo);
       });
+      break;
+      
+      case 5://自己部署的qq音乐接口
+      getMusicList = data.data.response.data.song.list
+      getMusicList.forEach((item) => {
+        let listInfo = {
+          singer: item.album.title,
+          name:item.name,
+          pic:"http://imgcache.qq.com/music/photo/album_300/17/300_albumpic_" + item.album.id + "_0.jpg",
+          id:"3333"
+        }
+        musicList.push(listInfo);
+      })
       break;
   }
   return musicList;

@@ -1,6 +1,7 @@
 <template>
   <div class="test">
     <div>测试页面</div>
+    <img :src="imgUrl"/>
   </div>
 </template>
 
@@ -9,18 +10,15 @@ import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 @Component({})
 export default class test extends Vue {
+  private imgUrl: string = "";
   created() {
-    // axios.get("http://118.24.179.175:666/test").then(res => {
-    //   console.log(res.data);
-    // });
-    let params: any = { test: 123 };
-
+    let that: any = this;
+  
     axios({
-      method: "post",
-      url: "http://118.24.179.175:666/test2",
-      data: params
+      method: "get",
+      url: "http://118.24.179.175:3200/getMusicVKey?songmid=003QLRda0tLCuz"
     }).then(res => {
-      console.log(res);
+      console.log(res)
     });
   }
   mounted() {}

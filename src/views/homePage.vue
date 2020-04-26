@@ -52,7 +52,7 @@
     >
       <!-- <span>封面</span> -->
       <span>歌曲</span>
-      <span>演唱</span>
+      <span>演唱/专辑</span>
     </div>
     <div
       class="music_list_box"
@@ -314,7 +314,7 @@ export default class homePage extends Vue {
   span {
     display: inline-block;
     text-align: center;
-    width: 50%;
+    width: 33%;
   }
 }
 
@@ -349,7 +349,7 @@ export default class homePage extends Vue {
     white-space: nowrap;
     text-overflow: ellipsis;
     vertical-align: center;
-    width: 50%;
+    width: 33%;
   }
 }
 
