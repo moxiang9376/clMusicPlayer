@@ -92,7 +92,7 @@ import musicPlayer from "../components/musicPlayer.vue";
 })
 export default class homePage extends Vue {
   private keyWord: string = ""; // 关键词
-  private musicStyle: number = 4; // 音乐平台编号（默认为自己部署的接口）
+  private musicStyle: number = 5; // 音乐平台编号（默认为自己部署的接口）
   private musicPlatform: any = [
     // 音乐平台
     { style: 0, name: "网易" }

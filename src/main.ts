@@ -23,16 +23,13 @@ import "lib-flexible/flexible.js";
 import common from "@/assets/js/common.js";
 Vue.prototype.common = common;
 
-// //引入转盘函数
-// import giftwheel from "./assets/js/giftWheel.js"
-// Vue.prototype.giftwheel = giftwheel
 
 Vue.config.productionTip = false;
 //监听浏览器宽度的改变(响应式测试)
 window.onresize = function() {
   let maxWidth: any = window.screen.width;
   if (maxWidth < 750) {
-    console.log("移动端");
+    console.log("屏幕小于750");
     // var head = document.getElementsByTagName("head")[0];
     // var link = document.createElement("link");
     // link.type = "text/css";
@@ -41,7 +38,7 @@ window.onresize = function() {
     // head.appendChild(link);
   }
   else{
-    console.log("PC端")
+    console.log("屏幕大于750")
   }
 };
 

@@ -31,7 +31,8 @@ export default {
           params: {
             key: songName,
             limit: 30,
-            page: page - 1
+            page: page - 1,
+            catZhida: 0
           }
         }).then(res => {
           console.log(res)
@@ -223,15 +224,15 @@ function changeMusicList(style, data) {
         musicList.push(listInfo);
       });
       break;
-      
-      case 5://自己部署的qq音乐接口
+
+    case 5://自己部署的qq音乐接口
       getMusicList = data.data.response.data.song.list
       getMusicList.forEach((item) => {
         let listInfo = {
           singer: item.album.title,
-          name:item.name,
-          pic:"http://imgcache.qq.com/music/photo/album_300/17/300_albumpic_" + item.album.id + "_0.jpg",
-          id:"3333"
+          name: item.name,
+          pic: "http://imgcache.qq.com/music/photo/album_300/17/300_albumpic_" + item.album.id + "_0.jpg",
+          id: "3333"
         }
         musicList.push(listInfo);
       })
