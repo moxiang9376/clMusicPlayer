@@ -1,36 +1,17 @@
 <template>
   <div class="homePage">
-    <div
-      class="nav_box"
-      :class="[box_check?'hide':'show']"
-    >
-      <div
-        class="nav_search"
-        @click="search()"
-      >search</div>
+    <div class="nav_box" :class="[box_check?'hide':'show']">
+      <div class="nav_search" @click="search()">search</div>
       <div>
         <input v-model="keyWord" />
         <select v-model="musicStyle">
-          <option
-            v-for="item in musicPlatform"
-            :value="item.style"
-          >{{item.name}}</option>
+          <option v-for="item in musicPlatform" :value="item.style">{{item.name}}</option>
         </select>
       </div>
-      <div class="nav_title">
-        云听
-      </div>
+      <div class="nav_title">云听</div>
     </div>
-    <div
-      class="search_box"
-      :class="[box_check?'show':'hide']"
-    >
-      <div
-        class="title"
-        @click="goWheel"
-      >
-        云 听
-      </div>
+    <div class="search_box" :class="[box_check?'show':'hide']">
+      <div class="title" @click="goWheel">云 听</div>
       <div class="input_box">
         <input v-model="keyWord" />
         <!-- <select v-model="musicStyle">
@@ -39,46 +20,25 @@
             v-for="item in musicPlatform"
             :value="item.style"
           >{{item.name}}</option>
-        </select> -->
+        </select>-->
       </div>
-      <div
-        @click="search()"
-        class="search_btn"
-      >search</div>
+      <div @click="search()" class="search_btn">search</div>
     </div>
-    <div
-      class="music_line_title"
-      :class="[box_check?'hide':'show']"
-    >
+    <div class="music_line_title" :class="[box_check?'hide':'show']">
       <!-- <span>封面</span> -->
       <span>歌曲</span>
       <span>演唱/专辑</span>
     </div>
-    <div
-      class="music_list_box"
-      :class="[box_check?'hide':'show']"
-    >
-
-      <div
-        ref="music_list_show"
-        class="music_list_show"
-        @scroll="onScroll()"
-      >
-        <div
-          class="music_list_line"
-          v-for="item in musicList"
-          @click="playSong(item)"
-        >
+    <div class="music_list_box" :class="[box_check?'hide':'show']">
+      <div ref="music_list_show" class="music_list_show" @scroll="onScroll()">
+        <div class="music_list_line" v-for="item in musicList" @click="playSong(item)">
           <!-- <span><img :src="item.pic" /></span> -->
           <span>{{item.name}}</span>
           <span>{{item.singer}}</span>
         </div>
       </div>
     </div>
-    <musicPlayer
-      v-if="!box_check"
-      v-bind:musicInfo="musicInfo"
-    ></musicPlayer>
+    <musicPlayer v-if="!box_check" v-bind:musicInfo="musicInfo"></musicPlayer>
   </div>
 </template>
 
@@ -143,7 +103,11 @@ export default class homePage extends Vue {
   //搜索
   search() {
     let that: any = this;
-    if (that.keyWord == "") {
+    if (
+      that.keyWord == "" ||
+      that.keyWord == null ||
+      that.keyWord == undefined
+    ) {
       alert("不找点什么听听？");
       return;
     }
